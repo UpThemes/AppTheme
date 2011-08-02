@@ -1,0 +1,31 @@
+body, #maincontent, #container {
+	width: 100%;
+	margin: 0;
+	float: none;
+	background: #fff url(none);
+}
+#header .column, .ad, .noprint {
+	display: none; 
+}
+body {
+	font: 1em Georgia, "Times New Roman", Times, serif;
+	color: #000; 
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: Helvetica, Arial, sans-serif;
+	color: #000;
+}
+h1 { font-size: 250%; }
+h2 { font-size: 175%; }
+h3 { font-size: 135%; }
+h4 { font-size: 100%; font-variant: small-caps; }
+h5 { font-size: 100%; }
+h6 { font-size: 90%; font-style: italic; }
+
+a:link, a:visited {
+	color: #00c;
+	font-weight: bold;
+	text-decoration: underline; }
+#maincontent a:link:after, #maincontent a:visited:after {
+	content: " (" attr(href) ") ";
+}
