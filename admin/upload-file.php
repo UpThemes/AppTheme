@@ -8,7 +8,7 @@ if( $_FILES[$upload_security] ):
 
 	$file = $_FILES[$upload_security];
 
-	$file = $uploaddir . str_replace('#', '-', str_replace(' ', '-', basename($file['name'])));
+	$file = $uploaddir . strtolower(str_replace('__', '_', str_replace('#', '_', str_replace(' ', '_', basename($file['name'])))));
 	
 		if (move_uploaded_file( $_FILES[$upload_security]['tmp_name'], $file)):
 			if(chmod($file,0777)):

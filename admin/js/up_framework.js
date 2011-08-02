@@ -5,7 +5,21 @@ http://pixelgraphics.us
 
 */
 
+function activate_save_animation(e){
+	
+	jQuery('.button-zone').addClass('formChanged');
+	jQuery('.button-zone button').addClass('save-me-fool');
+	jQuery('.formState').fadeIn( 400 );
+
+}
+
 jQuery(document).ready(function($){
+
+	$('button[type="reset"]').each(function(i){
+		
+		$(this).replaceWith($("<a class='button' href='"+document.location+"'>"+$(this).text()+"</a>"));
+	
+	});
 
 	$('li#toplevel_page_upthemes a').live('click', function(){
 		scroll(0,0);
@@ -75,52 +89,11 @@ jQuery(document).ready(function($){
 		$('#up_nav li:first a').click();
 		$('html').scrollTop(0);
 	}
-	
-	var buttonOffset = $('#button-zone').offset();		
-	if(buttonOffset)
-		var originalOffest = buttonOffset.top;
-	
-	var Sticky = function( $obj, opts ){
-		  
-	   $(window).scroll( 
-		  function(e){
-			 Sticky.onScroll(e, $obj, opts );
-		  });
-	   
-	}
-	Sticky.onScroll = function( e, $o, opts ){
-	   
-	   var iScrollTop = $(window).scrollTop();
-	   var sClass = "sticky";
-	   
-	   //set original data
-	   if( !$o.data(sClass) ){
-		  $o.data(sClass, {css:{position:$o.css('position'),top:$o.css('top')}, offset:$o.offset()} );
-	   }
-	   var oOrig = $o.data(sClass);
-	   var bIsSticky = $o.hasClass(sClass);
-	   
-	   if( iScrollTop > oOrig.offset.top && !bIsSticky ){
-		  $o.css({position:'fixed',top:0}).addClass(sClass);
-	   }else if(iScrollTop < oOrig.offset.top && bIsSticky){
-		  $o.css(oOrig.css).removeClass(sClass);
-	   }   
-	   
-	}
-	Sticky( $('#button-zone') );
-	
+		
 	$('#upthemes_framework input, #upthemes_framework select,#upthemes_framework textarea[class!=click-copy][class!=up_import_code]').live('change', function(e){
-	
-		$('#button-zone').animate({ 
-			backgroundColor: '#555',
-			borderLeftColor: '#555',
-			borderRightColor: '#555'
-		});
-		$('#button-zone button').addClass('save-me-fool');
-		$('.formState').fadeIn( 400 );
-	
+		activate_save_animation(e);
 	});
-	
+		
 	$colorpicker_inputs = $('input.popup-colorpicker');
 	
 	$colorpicker_inputs.each(
