@@ -6,7 +6,7 @@ $options = array (
         "name" => "Post Title",
         "desc" => "Select the font and style for post titles.",
         "id" => "posttitle",
-        "selector" => ".title",
+        "selector" => "#title h1",
         "type" => "typography",
         "default" => "buda")
 
