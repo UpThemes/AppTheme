@@ -3,6 +3,66 @@
 	padding: 0;
 }
 
+/* =WordPress Core
+ -*------------------------------------------------------------- */
+.alignnone {
+	margin: 5px;
+}
+
+.aligncenter, 
+div.aligncenter {
+	display:block;
+	margin: 5px auto;
+}
+
+.alignright {
+	float:right;
+	margin: 5px;
+}
+
+.alignleft {
+	float:left;
+	margin: 5px;
+}
+
+.wp-caption {
+	max-width: 96%; /* Image does not overflow the content area */
+	padding: 5px 3px 10px;
+	text-align: center;
+}
+
+.wp-caption img {
+	border: 0 none;
+	height: auto;
+	margin:0;
+	max-width: 98.5%;
+	padding:0;
+	width: auto;
+}
+
+.wp-caption p.wp-caption-text {
+	margin:0;
+	padding:0;
+}
+
+.clearfix {
+	display:block;
+	clear:both;
+}
+
+#content img {
+	max-width: 450px;
+	height: auto;
+}
+
+.postwrapper {
+	clear:both;
+}
+
+#comments {
+	clear:both;
+}
+
 html, body {
 	background-image: url(../images/basics/bg.png);
 	background-color: #262b2f;

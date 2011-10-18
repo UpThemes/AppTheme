@@ -181,7 +181,7 @@ $j = jQuery.noConflict();
 
 	            <?php endif; ?>
         		
-        	<?php elseif( is_home() && $up_options->video ): ?>
+        	<?php elseif( is_front_page() && $up_options->video ): ?>
         	
 	            <div class="hvlog {width: '230', height: '346', controller: 'false', loop: 'true', pluginspage: 'http://www.apple.com/quicktime/download/'}">
 	                <a href="<?php if($up_options->video){ echo $up_options->video; } else { bloginfo('template_directory'); ?>/media/example.mov<?php } ?>" rel="enclosure"><?php _e('click to play'); ?></a>
