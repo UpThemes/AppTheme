@@ -14,9 +14,9 @@
  * @link 		http://codex.wordpress.org/Function_Reference/the_post 				the_post()
  * @link 		http://codex.wordpress.org/Function_Reference/the_title			 	the_title()
  * 
- * @uses		navigation_above()			Defined in /functions.php
- * @uses		navigation_below()			Defined in /functions.php
- * @uses		no_posts()					Defined in /functions.php
+ * @uses		apptheme_navigation_above()			Defined in /functions.php
+ * @uses		apptheme_navigation_below()			Defined in /functions.php
+ * @uses		apptheme_no_posts()					Defined in /functions.php
  * @uses		upfw_get_template_context()	Defined in /admin/functions.php
  *
  * @package 	AppTheme
@@ -37,7 +37,7 @@
  * Child Themes can replace this template part file globally, via "header.php", or in
  * a specifric context only, via "header-{context}.php"
  */
-get_header( upfw_get_template_context() ); 
+get_header(); 
 ?>    
 
 <div id="content">	
@@ -47,7 +47,7 @@ get_header( upfw_get_template_context() );
 		/**
 		 * Output above-loop navigation links
 		 */
-		navigation_above(); 
+		apptheme_navigation_above(); 
 		?>
 
 		<div class="column six">
@@ -70,7 +70,7 @@ get_header( upfw_get_template_context() );
 			/**
 			 * Output no-post content
 			 */
-			no_posts(); 
+			apptheme_no_posts(); 
 			?>
 		
 			<?php endif; ?>
@@ -81,7 +81,7 @@ get_header( upfw_get_template_context() );
 		/**
 		 * Output above-loop navigation links
 		 */
-		navigation_below(); 
+		apptheme_navigation_below(); 
 		?>
 
 	</div><!-- .row -->
@@ -100,5 +100,5 @@ get_header( upfw_get_template_context() );
  * Child Themes can replace this template part file globally, via "footer.php", or in
  * a specific context only, via "footer-{context}.php"
  */
-get_footer( upfw_get_template_context() ); 
+get_footer(); 
 ?>

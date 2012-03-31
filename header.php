@@ -35,22 +35,11 @@
  * @since 		AppTheme 1.0
  */
 
-/**
- * Globalize $up_options
- * 
- * @global	array	$up_options		Theme Options
- */
-global $up_options;
-/**
-* Globalize $post
-* 
-* @global	object	$post			Post object
-*/
-global $post;
+$up_options = upfw_get_options();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
-											"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" <?php  
+
+<!DOCTYPE html>
+<html <?php  
 /**
  * Output language attributes for the <html> tag
  * 
@@ -83,7 +72,7 @@ language_attributes();
 	 * @return	string			e.g. "text/html"
 	 */
 	bloginfo('html_type'); 
-	?>; charset=<?php 
+	?>" charset="<?php 
 	/**
 	 * Output the site HTML type
 	 *
@@ -106,49 +95,13 @@ language_attributes();
 	/**
 	 * Output the HTML <title> tag
 	 * 
-	 * Outputs the up_title() function if
-	 * it exists; otherwise, falls back to 
-	 * the wp_title() function with the
-	 * Site Name appended
+	 * Outputs the wp_title() function.
 	 */
-	if(function_exists('up_title')):
-		echo "<title>".up_title()."</title>";
-	else:
-		echo "<title>";
-		wp_title('');
-		if(!is_home())echo ' - '.get_bloginfo('name');
-		echo "</title>";
-	endif;
-		
-	/**
-	 * Fire the 'up_seo' custom action hook
-	 * 
-	 * @param	null
-	 * @return	mixed	any output hooked into 'up_seo'
-	 */
-	do_action( 'up_seo' );
+	echo "<title>";
+	wp_title(false);
+	echo "</title>";
 	?>
 	<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" media="screen" />
-	<link rel="start" href="<?php echo home_url(); ?>" title="Home" />
-	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo( 'name' ); ?> RSS Feed" href="<?php echo upfw_rss(); ?>" />
-	<link rel="pingback" href="<?php 
-	/**
-	 * Output the pingback URL
-	 *
-	 * Codex reference: {@link http://codex.wordpress.org/Function_Reference/bloginfo bloginfo}
-	 * Codex reference: {@link http://codex.wordpress.org/Function_Reference/get_bloginfo get_bloginfo}
-	 * 
-	 * bloginfo() prints (displays/outputs) the data requested. 
-	 * get_bloginfo() returns, rather than display/output, the data
-	 * 
-	 * The 'pingback_url' parameter is the URL used to send pingbacks
-	 *
-	 * @param	string	$show	e.g. 'pingback_url'; default: none
-	 * @return	string			e.g. "{url}"
-	 */
-	bloginfo( 'pingback_url' ); 
-	?>" />
-
 	<?php wp_head(); ?>
 	<?php
 	/**
@@ -163,92 +116,41 @@ language_attributes();
 </head>
 <body <?php body_class(); ?>>
 
-<div id="wrapper">	
+<div id="wrapper">
+
     <div id="header">
     	
     	<?php if ( $up_options->display_logo == "yes" ) : ?>
     		<a id="logo" href="<?php echo home_url(); ?>"><img src="<?php echo $up_options->logo; ?>"></a>
     	<?php endif; ?>
 
-        <?php
+      <?php
             
-		if ( function_exists( 'wp_nav_menu' ) ) {
-
-            $args = array(
-            	'container' 		=> false,
-            	'menu_id'			=> 'navigation',
-            	'theme_location'	=> 'primary',
-            	'fallback_cb'		=> 'apptheme_pagemenu',
-            	'link_before'     	=> '<span>',
-				'link_after'      	=> '</span>'
-            );
-            
-			echo wp_nav_menu( $args );
-
-		} else {
+			if ( function_exists( 'wp_nav_menu' ) ) {
 			
-			apptheme_pagemenu();
+			        $args = array(
+			        	'container' 		=> false,
+			        	'menu_id'			=> 'navigation',
+			        	'theme_location'	=> 'primary',
+			        	'fallback_cb'		=> 'apptheme_pagemenu',
+			        	'link_before'     	=> '<span>',
+					'link_after'      	=> '</span>'
+			        );
+			        
+				echo wp_nav_menu( $args );
 			
-		}		
-		?>
-
-        <div id="title">
-
-     	<?php if( ! is_front_page() && ( is_single() || is_page() ) ) : ?>
-
-        	<?php if( ( is_single() && isset( $up_options->disable_app_info_posts ) && 1 == $up_options->disable_app_info_posts ) || ( is_page() && isset( $up_options->disable_app_info_pages ) && 1 == $up_options->disable_app_info_pages ) ) : ?>
-	            <h1 class="no-app-icon"><?php $post->post_title; ?></h1>
-	        <?php 
-			else : 
-				?>
-	        
-	        	<h1><?php if( get_post_meta( $post->ID, 'app-name', true ) ) : ?>
-					<?php echo get_post_meta( $post->ID, 'app-name', true ); ?>
-	        	<?php else: ?>
-		            <?php if ( $up_options->app_name ){ echo $up_options->app_name; } ?>
-				<?php endif; ?></h1>
-
-				<?php
-				if( get_post_meta( $post->ID, 'app-link', true ) )
-					$link = get_post_meta( $post->ID, 'app-link', true );
-				else
-					$link = $up_options->applink;
-				?>
+			} else {
 				
-	        	<a href="<?php echo $link; ?>"><span>
-	        	<?php if( get_post_meta( $post->ID, 'app-price', true ) ): ?>
-					<?php echo get_post_meta( $post->ID, 'app-price', true ); ?>
-	        	<?php else: ?>
-		            <?php if( $up_options->app_price ){ echo $up_options->app_price; } ?>
-				<?php endif; ?>
-				</span></a>
+				apptheme_pagemenu();
+				
+			}		
+			?>
 
-	            <?php if( get_post_meta($post->ID, 'app-icon', true) ): ?>
-	   			<style type="text/css">
-	   			#title h1{ background-image: url("<?php echo get_post_meta( $post->ID, 'app-icon', true ); ?>"); }
-	   			</style>
-	   			<?php elseif( $up_options->app_icon ): ?>
-	   			<style type="text/css">
-	   			#title h1{ background-image: url("<?php echo $up_options->app_icon; ?>"); }
-	   			</style>
-	   			<?php endif; ?>
-	            
-	        <?php endif; ?>
-        
-        <?php else: ?>
-
-	            <h1><?php if( $up_options->app_name ){ ?><?php echo $up_options->app_name; } else { bloginfo('name'); } ?></h1>
-	            <a href="<?php echo $up_options->applink; ?>"><span><?php if( $up_options->app_price ){ ?><?php echo $up_options->app_price; ?><?php } ?></span></a>
-	            
-	            <?php if( $up_options->app_icon ): ?>
-	   			<style type="text/css">
-	   			#title h1{ background-image: url("<?php echo $up_options->app_icon; ?>"); }
-	   			</style>
-	   			<?php endif; ?>
-	   			
-		<?php endif;  ?>
-
-        </div><!-- #title -->
+      <div id="title">
+				<?php the_post(); ?>
+				<h1><?php apptheme_the_title(); ?></h1>
+				<?php rewind_posts(); ?>
+      </div><!-- #title -->
         
     </div><!-- #header -->
 
@@ -256,42 +158,29 @@ language_attributes();
   
 		<div id="iphone">
 			<div class="img">
-				<?php if ( ! is_front_page() && ( is_single() || is_page() ) && ( get_post_meta( $post->ID, 'video', true ) || get_post_meta( $post->ID, 'image', true ) ) ) : ?>
+				<?php if ( ( is_singular() ) && ( get_post_meta( $post->ID, 'app-video', true ) || get_post_meta( $post->ID, 'app-image', true ) ) ) : ?>
 				
-					<?php if ( get_post_meta( $post->ID,'video',true ) ) : // if page or post has video ?>
+					<?php if ( get_post_meta( $post->ID,'app-video',true ) ) : // if page or post has video ?>
 
 						<div class="hvlog {width: '230', height: '346', controller: 'false', loop: 'true', pluginspage: 'http://www.apple.com/quicktime/download/'}">
-							<a href="<?php echo get_post_meta( $post->ID, 'video', true ); ?>" rel="enclosure"><?php _e( 'click to play', 'apptheme' ); ?></a>
+							<a href="<?php echo get_post_meta( $post->ID, 'app-video', true ); ?>" rel="enclosure"><?php _e( 'click to play', 'apptheme' ); ?></a>
 							
-							<?php if( get_post_meta( $post->ID, 'image', true ) ): ?>
-							<img src="<?php echo get_post_meta( $post->ID, 'image', true ); ?>" alt="<?php the_title(); ?>" />
+							<?php if( get_post_meta( $post->ID, 'app-image', true ) ): ?>
+							<img src="<?php echo get_post_meta( $post->ID, 'app-image', true ); ?>" alt="<?php the_title(); ?>" />
 							<?php else: ?>
 							<img src="<?php echo get_template_directory_uri(); ?>/images/screenshot-2.png" alt="" />
 							<?php endif; ?>
 							
 						</div>
 					
-					<?php elseif( get_post_meta( $post->ID, 'image', true ) ) : // if page or post has image ?>
+					<?php elseif( get_post_meta( $post->ID, 'app-image', true ) ) : // if page or post has image ?>
 
 						<div>
-							<img src="<?php echo get_post_meta( $post->ID, 'image', true ); ?>" alt="<?php the_title(); ?>" />
+							<img src="<?php echo get_post_meta( $post->ID, 'app-image', true ); ?>" alt="<?php the_title(); ?>" />
 						</div>
 
 					<?php endif; ?>
-					
-				<?php elseif( is_front_page() && $up_options->video ): ?>
-				
-					<div class="hvlog {width: '230', height: '346', controller: 'false', loop: 'true', pluginspage: 'http://www.apple.com/quicktime/download/'}">
-						<a href="<?php if( $up_options->video ){ echo $up_options->video; } else { echo get_template_directory_uri(); ?>/media/example.mov<?php } ?>" rel="enclosure"><?php _e( 'click to play', 'apptheme' ); ?></a>
-						<img src="<?php echo $up_options->homepage_player_screenshot; ?>" alt="" />
-					</div>
-				
-				<?php elseif( $up_options->homepage_player_screenshot ): ?>
-				
-					<div>
-						<img src="<?php echo $up_options->homepage_player_screenshot; ?>" alt="" />
-					</div>
-								
+
 				<?php endif; ?>
 			</div><!-- #img -->
 		</div><!-- #iphone -->

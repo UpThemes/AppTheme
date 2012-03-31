@@ -16,7 +16,7 @@
  * @link 		http://codex.wordpress.org/Function_Reference/the_post 				the_post()
  * @link 		http://codex.wordpress.org/Function_Reference/wp_link_pages			wp_link_pages()
  * 
- * @uses		no_posts()					Defined in /functions.php
+ * @uses		apptheme_no_posts()					Defined in /functions.php
  *
  * @package 	AppTheme
  * @copyright	Copyright (c) 2010, UpThemes
@@ -36,7 +36,7 @@
  * Child Themes can replace this template part file globally, via "header.php", or in
  * a specific context only, via "header-page.php"
  */
-get_header( 'page' ); 
+get_header(); 
 ?>    
 
 <div id="content">	
@@ -45,11 +45,13 @@ get_header( 'page' );
 		
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 			
-			<div id="post-<?php the_ID(); ?>" class="postwrapper">
+			<div id="post-<?php the_ID(); ?>" <?php post_class('postwrapper'); ?>>
+						
+				<h1><?php the_title(); ?></h1>
 						
 				<?php the_content(); ?>
 			
-				<?php wp_link_pages( 'before=<p class="clearfix">' ); ?>
+				<?php wp_link_pages(); ?>
 	
 			</div><!-- /.postwrapper -->
 
@@ -72,7 +74,7 @@ get_header( 'page' );
 			/**
 			 * Output no-post content
 			 */
-			no_posts(); 
+			apptheme_no_posts(); 
 			?>
 		
 			<?php endif; ?>
@@ -94,5 +96,5 @@ get_header( 'page' );
  * Child Themes can replace this template part file globally, via "footer.php", or in
  * a specific context only, via "footer-page.php"
  */
-get_footer( 'page' ); 
+get_footer(); 
 ?>

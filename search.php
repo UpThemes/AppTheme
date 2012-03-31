@@ -15,9 +15,9 @@
  * @link 		http://codex.wordpress.org/Function_Reference/the_post 				the_post()
  * @link 		http://codex.wordpress.org/Function_Reference/the_title			 	the_title()
  * 
- * @uses		navigation_above()			Defined in /functions.php
+ * @uses		apptheme_navigation_above()			Defined in /functions.php
  * @uses		navigation_below()			Defined in /functions.php
- * @uses		no_posts()					Defined in /functions.php
+ * @uses		apptheme_no_posts()					Defined in /functions.php
  *
  * @package 	AppTheme
  * @copyright	Copyright (c) 2010, UpThemes
@@ -37,7 +37,7 @@
  * Child Themes can replace this template part file globally, via "header.php", or in
  * a specific context only, via "header-search.php"
  */
-get_header( 'search' ); 
+get_header(); 
 ?>    
 
 <div id="content">	
@@ -46,11 +46,11 @@ get_header( 'search' );
 		/**
 		 * Output above-loop navigation links
 		 */
-		navigation_above(); 
+		apptheme_navigation_above(); 
 		?>
 		<div class="column six">
 		
-		  <h1><?php _e( 'Search Results for', 'apptheme' ); ?> <em id="search-terms">'<?php echo get_search_query(); ?>'</em></h1>
+		  <h1><?php sprintf( __e( 'Search Results for %s', 'apptheme' ), '<em id="search-terms">\'' . get_search_query() . '\'</em>' ); ?></h1>
 		
 		  <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 		  
@@ -68,7 +68,7 @@ get_header( 'search' );
 		  /**
 		   * Output no-post content
 		   */
-		  no_posts(); 
+		  apptheme_no_posts(); 
 		  ?>
 	  
 		  <?php endif; ?>
@@ -78,7 +78,7 @@ get_header( 'search' );
 		/**
 		 * Output below-loop navigation links
 		 */
-		navigation_below(); 
+		apptheme_navigation_below(); 
 		?>
 	</div><!-- .row -->
 </div><!-- #content -->
@@ -96,5 +96,5 @@ get_header( 'search' );
  * Child Themes can replace this template part file globally, via "footer.php", or in
  * a specific context only, via "footer-search.php"
  */
-get_footer( 'search' ); 
+get_footer(); 
 ?>

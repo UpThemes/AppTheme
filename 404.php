@@ -29,10 +29,10 @@
  * Child Themes can replace this template part file globally, via "header.php", or in
  * a specifric context only, via "header-404.php"
  */
-get_header( '404' );
+get_header();
 ?>
   
-<div id="maincontent" class="equal">
+<div id="content">
 
 	<div class="inner">
 
@@ -59,5 +59,5 @@ get_header( '404' );
  * Child Themes can replace this template part file globally, via "footer.php", or in
  * a specific context only, via "footer-404.php"
  */
-get_footer( '404' ); 
+get_footer(); 
 ?>

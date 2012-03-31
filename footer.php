@@ -27,12 +27,12 @@
  * 
  * @global	array	$up_options		Theme Options
  */
-global $up_options;
+$up_options = upfw_get_options();
 ?>
 		</div><!-- #main -->
 		
 		<div id="footer">
-			<p><?php echo $up_options->footertext; ?></p>
+			<p><?php echo $up_options->footer_text; ?></p>
 		</div><!-- #footer -->
 		
     </div><!-- #wrapper -->

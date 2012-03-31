@@ -1,6 +1,11 @@
 <?php
+
+/*
+Template Name: Featured App
+*/
+
 /**
- * Front Page template file
+ * Featured App template file
  *
  * This file is the front page template file, used on the site front page, per
  * the {@link http://codex.wordpress.org/Template_Hierarchy Template Hierarchy}.
@@ -18,13 +23,6 @@
  */ 
 
 /**
- * Globalize $up_options
- * 
- * @global	array	$up_options		Theme Options
- */
-global $up_options;
-
-/**
  * Include the header template part file
  * 
  * MUST come first. 
@@ -36,22 +34,25 @@ global $up_options;
  * Child Themes can replace this template part file globally, via "header.php", or in
  * a specific context only, via "header-front-page.php"
  */
-get_header( 'front-page' );
+get_header();
+
+$up_options = upfw_get_options();
+
 ?>
 
 <div id="content">	
 	<div class="row">
+		<?php the_post(); ?>
 		<div class="column six">
-			<?php if($up_options->short_descr){ ?><p><?php echo $up_options->short_descr; ?></p><?php } ?>
-			<?php if($up_options->addl_descr){ ?><p><?php echo $up_options->addl_descr; ?></p><?php } ?>
+			<?php the_content(); ?>
 		</div>
 	</div><!-- .row -->
 	<div class="row">
-		<div class="column oneandahalf">
-			<p><a href="<?php if($up_options->screenshot_1) {echo $up_options->screenshot_1;} else { echo get_template_directory_uri() . "/uploads/screenshot-1.png"; } ?>" class="link" rel="group2" title="<?php echo $up_options->screenshot_1_caption; ?>"><img src="<?php if($up_options->screenshot_1_thumb) {echo $up_options->screenshot_1_thumb;} else { echo get_template_directory_uri() . "/uploads/screenshot-1-thumb.png"; } ?>" alt="" /><span class="img">open image</span></a></p>
+<?php /*		<div class="column oneandahalf">
+			<p><a href="<?php echo $up_options->screenshot_1; ?>" class="view" rel="group2" title="<?php echo $up_options->screenshot_1_caption; ?>"><img src="<?php echo $up_options->screenshot_1_thumb; ?>" alt="" /><span class="img"><?php _e('open image','apptheme'); ?></span></a></p>
 		</div><!-- .column.oneandahalf -->
 		<div class="column oneandahalf">
-			<p><a href="<?php if($up_options->screenshot_2) {echo $up_options->screenshot_2;} else { echo get_template_directory_uri() . "/uploads/screenshot-2.png"; } ?>" class="link" rel="group2" title="<?php echo $up_options->screenshot_2_caption; ?>"><img src="<?php if($up_options->screenshot_2_thumb) {echo $up_options->screenshot_2_thumb;} else { echo get_template_directory_uri() . "/uploads/screenshot-2-thumb.png"; } ?>" alt="" /><span class="img">open image</span></a></p>
+			<p><a href="<?php echo $up_options->screenshot_2; ?>" class="view" rel="group2" title="<?php echo $up_options->screenshot_2_caption; ?>"><img src="<?php echo $up_options->screenshot_2_thumb; ?>" alt="" /><span class="img"><?php _e('open image','apptheme'); ?></span></a></p>
 		</div><!-- .column.oneandahalf -->
 		<div class="column three">
 			<?php if($up_options->availability == 1 && $up_options->applink){ ?>
@@ -59,7 +60,7 @@ get_header( 'front-page' );
 			<?php } else { ?>
 				<p><a class="appstore-soon"><?php _e( 'Soon available in the apple store', 'apptheme' ); ?></a></p>
 			<?php } ?>
-		</div><!-- .column.three -->
+		</div><!-- .column.three --> */ ?>
 	</div><!-- .row -->
 	<div class="row">
 		<div class="column three">
@@ -108,5 +109,5 @@ get_header( 'front-page' );
  * Child Themes can replace this template part file globally, via "footer.php", or in
  * a specific context only, via "footer-front-page.php"
  */
-get_footer( 'front-page' ); 
+get_footer(); 
 ?>
