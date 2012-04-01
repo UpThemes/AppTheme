@@ -47,7 +47,6 @@ function apptheme_no_posts(){
 <?php
 }
 
-
 /**
  * Output Navigation menu fallback
  * 
@@ -130,26 +129,27 @@ function apptheme_filter_the_title( $title ){
 
 	global $post;
 
-	if( is_page() && get_post_meta( $post->ID, 'app-name', true ) ) :
+	$appinfo = get_post_meta( $post->ID, 'appinfo', true );
 
-   	$title = get_post_meta( $post->ID, 'app-name', true );
 
-		if( get_post_meta( $post->ID, 'app-link', true ) )
-			$link = get_post_meta( $post->ID, 'app-link', true );
+	if( $appinfo[0] ):
 
-      	$title .= "<a href=\"$link\"><span>";
-      	
-      if( get_post_meta( $post->ID, 'app-price', true ) ):
-      	$title .= get_post_meta( $post->ID, 'app-price', true );
-      endif;
+		if( $appinfo[0]['app-icon'] )
+			$link = $appinfo[0]['app-store-url'];
 
-			$title .= '</span></a>';
+    $title .= "<a href=\"$link\"><span>";
+    	
+    if( $appinfo[0]['app-price'] ):
+    	$title .= $appinfo[0]['app-price'];
+    endif;
 
-      if( get_post_meta($post->ID, 'app-icon', true) ):
-	 			$title .= '<style type="text/css">';
-	 			$title .= '.app-icon #title h1{ background-image: url("' . get_post_meta( $post->ID, 'app-icon', true ) . '"); }';
-	 			$title .= '</style>';
- 			endif;
+		$title .= '</span></a>';
+
+    if( $appinfo[0]['app-icon'] ):
+ 			$title .= '<style type="text/css">';
+ 			$title .= '.app-icon #title h1{ background-image: url("' . $appinfo[0]['app-icon'] . '"); }';
+ 			$title .= '</style>';
+			endif;
 
 	endif;
 	
@@ -205,7 +205,9 @@ function apptheme_icon_title_class( $classes ){
 
 	global $post;
 
-	if( get_post_meta($post->ID, 'app-icon', true) )
+	$appinfo = get_post_meta($post->ID,'appinfo',true);
+
+	if( isset( $appinfo[0]['app-icon'] ) )
 		$classes[] = "app-icon";
 	else
 		$classes[] = "no-app-icon";

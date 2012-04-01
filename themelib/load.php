@@ -14,3 +14,4 @@
  
  require_once("init.php");
  require_once("extensions.php");
+ require_once("structure.php");

@@ -4,7 +4,7 @@
 		
 		$.embedquicktime();
 		
-		$view = new View( $('a[href~=jpg],a[href~=png],a[href~=gif]') );
+		$view = new View( $('a[href*=jpg],a[href*=png],a[href*=gif]') );
 		
 	});
 

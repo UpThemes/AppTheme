@@ -1,9 +1,5 @@
 <?php
 
-/*
-Template Name: Featured App
-*/
-
 /**
  * Featured App template file
  *
@@ -48,50 +44,19 @@ $up_options = upfw_get_options();
 		</div>
 	</div><!-- .row -->
 	<div class="row">
-<?php /*		<div class="column oneandahalf">
-			<p><a href="<?php echo $up_options->screenshot_1; ?>" class="view" rel="group2" title="<?php echo $up_options->screenshot_1_caption; ?>"><img src="<?php echo $up_options->screenshot_1_thumb; ?>" alt="" /><span class="img"><?php _e('open image','apptheme'); ?></span></a></p>
+		<?php $appinfo = get_post_meta($post->ID,'appinfo',true); ?>
+		<div class="column oneandahalf">
+			<p><a href="<?php echo $appinfo[0]['app-image-2']; ?>" class="view" rel="group2" title="<?php echo $appinfo[0]['app-image-2-caption']; ?>"><img src="<?php echo $appinfo[0]['app-thumbnail-2']; ?>" alt="" /><span class="img"><?php _e('open image','apptheme'); ?></span></a></p>
 		</div><!-- .column.oneandahalf -->
 		<div class="column oneandahalf">
-			<p><a href="<?php echo $up_options->screenshot_2; ?>" class="view" rel="group2" title="<?php echo $up_options->screenshot_2_caption; ?>"><img src="<?php echo $up_options->screenshot_2_thumb; ?>" alt="" /><span class="img"><?php _e('open image','apptheme'); ?></span></a></p>
+			<p><a href="<?php echo $appinfo[0]['app-image-3']; ?>" class="view" rel="group2" title="<?php echo $appinfo[0]['app-image-3-caption']; ?>"><img src="<?php echo $appinfo[0]['app-thumbnail-3']; ?>" alt="" /><span class="img"><?php _e('open image','apptheme'); ?></span></a></p>
 		</div><!-- .column.oneandahalf -->
 		<div class="column three">
-			<?php if($up_options->availability == 1 && $up_options->applink){ ?>
-				<p><a href="<?php echo $up_options->applink; ?>" class="appstore"><?php _e( 'Available in the app store', 'apptheme' ); ?></a></p>
+			<?php if($appinfo[0]['app-store-status'] != 'Coming Soon' && $appinfo[0]['app-store-url']){ ?>
+				<p><a href="<?php echo $appinfo[0]['app-store-url']; ?>" class="appstore"><?php _e( 'Available in the app store', 'apptheme' ); ?></a></p>
 			<?php } else { ?>
-				<p><a class="appstore-soon"><?php _e( 'Soon available in the apple store', 'apptheme' ); ?></a></p>
+				<p><a class="appstore-soon"><?php _e( 'Soon available in the App Store', 'apptheme' ); ?></a></p>
 			<?php } ?>
-		</div><!-- .column.three --> */ ?>
-	</div><!-- .row -->
-	<div class="row">
-		<div class="column three">
-			<?php  
-			/**
-			 * Include the homepage-leftbottom sidebar template part file
-			 * 
-			 * Calls the sidebar-homepage-leftbottom template part file.
-			 * 
-			 * Codex reference: http://codex.wordpress.org/Function_Reference/get_sidebar
-			 * 
-			 * Child Themes can replace this template part file globally, 
-			 * via "sidebar-homepage-leftbottom.php"
-			 */
-			get_sidebar( 'homepage-leftbottom' ); 
-			?>
-		</div><!-- .column.three -->
-		<div class="column three">
-			<?php 
-			/**
-			 * Include the homepage-rightbottom sidebar template part file
-			 * 
-			 * Calls the sidebar-homepage-rightbottom template part file.
-			 * 
-			 * Codex reference: http://codex.wordpress.org/Function_Reference/get_sidebar
-			 * 
-			 * Child Themes can replace this template part file globally, 
-			 * via "sidebar-homepage-rightbottom.php"
-			 */
-			get_sidebar( 'homepage-rightbottom' ); 
-			?>
 		</div><!-- .column.three -->
 	</div><!-- .row -->
 </div><!-- #content -->   

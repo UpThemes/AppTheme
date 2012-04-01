@@ -653,7 +653,7 @@ form p.error big {
 	position: relative;
 }
 
-#iphone a {
+#iphone a.click-to-play {
 	height: 57px;
 	width: 179px;
 	display: block;
@@ -675,11 +675,11 @@ form p.error big {
 	filter:alpha(opacity=50);
 }
 
-#iphone a:hover {
+#iphone a.click-to-play:hover {
 	background-position: 0 -57px;
 }
 
-#iphone a:active {
+#iphone a.click-to-play:active {
 	background-position: 0 -114px;
 }
 
@@ -803,6 +803,7 @@ form p.error big {
 	text-align: center;
 	position: relative;
 	z-index: 1;
+	padding-bottom: 60px;
 }
 
 #footer p{
