@@ -1,3 +1,6 @@
 [submodule "lib"]
 	path = lib
 	url = git@github.com:LiftUX/WP-ThemeLib.git
+[submodule "admin"]
+	path = admin
+	url = git@github.com:LiftUX/UpThemes-Framework.git
