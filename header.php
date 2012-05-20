@@ -160,8 +160,6 @@ language_attributes();
 		<div id="iphone">
 			<div class="img">
 
-        <?php echo "<span class='font-size:28px'>" . get_the_ID() . "</span>"; ?>
-
           <?php if( $wp_query->is_singular() ): ?>
 
     				<?php $appinfo = get_post_meta( $wp_query->post->ID, 'appinfo' ); ?>
@@ -188,7 +186,7 @@ language_attributes();
 
   					<?php endif; ?>
 
-  				<?php endif; ?>
+  				<?php endif; rewind_posts(); ?>
 
 			</div><!-- #img -->
 		</div><!-- #iphone -->
