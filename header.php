@@ -158,9 +158,9 @@ language_attributes();
 		<div id="iphone">
 			<div class="img">
 
-				<?php $appinfo = get_post_meta( $post->ID, 'appinfo', true ); ?>
+				<?php if ( is_singular() && get_post_type() == 'app' ) : the_post(); ?>
 
-				<?php if ( is_singular() ) : ?>
+  				<?php $appinfo = get_post_meta( get_the_ID(), 'appinfo', true ); ?>
 
 					<?php $video = $video ? $appinfo[0]['app-demo-video'] : $up_options->default_video; ?>
 					<?php $image = $image ? $appinfo[0]['app-image-1'] : $up_options->default_image; ?>
@@ -169,13 +169,13 @@ language_attributes();
 						
 						<div class="hvlog {width: '230', height: '346', controller: 'false', loop: 'true', pluginspage: 'http://www.apple.com/quicktime/download/'}">
 							<a class="click-to-play" href="<?php echo $video; ?>" rel="enclosure"><?php _e( 'click to play', 'apptheme' ); ?></a>
-							
+
 							<?php if( isset( $image ) ): ?>
 							<img src="<?php echo $image; ?>" alt="" />
 							<?php endif; ?>
 
 						</div>
-					
+
 					<?php elseif( isset( $image ) ) : // if page or post has image ?>
 
 						<div>
