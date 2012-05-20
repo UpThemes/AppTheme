@@ -153,19 +153,21 @@ language_attributes();
         
     </div><!-- #header -->
 
+  <?php global $wp_query; ?>
+
 	<div id="main">
   
 		<div id="iphone">
 			<div class="img">
 
-				<?php if ( have_posts() ) : while( have_posts() ): the_post(); ?>
+        <?php echo "<span class='font-size:28px'>" . get_the_ID() . "</span>"; ?>
 
-          <?php if( is_singular() && get_post_type() == 'app' ): ?>
+          <?php if( $wp_query->is_singular() ): ?>
 
-    				<?php $appinfo = get_post_meta( get_the_ID(), 'appinfo', true ); ?>
-  
-  					<?php $video = $video ? $appinfo[0][0]['app-demo-video'] : $up_options->default_video; ?>
-  					<?php $image = $image ? $appinfo[0][0]['app-image-1'] : $up_options->default_image; ?>
+    				<?php $appinfo = get_post_meta( $wp_query->post->ID, 'appinfo' ); ?>
+ 
+  					<?php $video = $appinfo[0][0]['app-demo-video'] ? $appinfo[0][0]['app-demo-video'] : $up_options->default_video; ?>
+  					<?php $image = $appinfo[0][0]['app-image-1'] ? $appinfo[0][0]['app-image-1'] : $up_options->default_image; ?>
   
   					<?php if ( isset( $video ) ) : // if page or post has video ?>
   						
@@ -188,6 +190,5 @@ language_attributes();
 
   				<?php endif; ?>
 
-				<?php endwhile; endif; rewind_posts(); ?>
 			</div><!-- #img -->
 		</div><!-- #iphone -->
